@@ -9,10 +9,27 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <style>
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-control {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .btn {
+        padding: 10px 15px;
+        background-color: #111827;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="prose container mx-auto px-5">
       <%= yield %>
     </main>
   </body>
