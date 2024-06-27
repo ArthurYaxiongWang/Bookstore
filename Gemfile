@@ -68,7 +68,7 @@ end
 
 gem "tailwindcss-rails", "~> 2.6"
 
-gem 'foreman'
+gem 'foreman', '~> 0.87.2'
 
 gem "activeadmin", "~> 3.2"
 
