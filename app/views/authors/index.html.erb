@@ -10,20 +10,23 @@
   </div>
 <% end %>
 
-
-<table>
-  <thead>
+<table class="min-w-full bg-white border">
+  <thead class="bg-gray-50">
     <tr>
-      <th>Name</th>
-      <th>Actions</th>
+      <th class="py-2 px-4 border-b">Name</th>
+      <th class="py-2 px-4 border-b">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @authors.each do |author| %>
-      <tr>
-        <td><%= author.name %></td>
-        <td><%= link_to 'Show', author_path(author) %></td>
+      <tr class="bg-white">
+        <td class="py-2 px-4 border-b"><%= author.name %></td>
+        <td class="py-2 px-4 border-b">
+          <%= link_to 'Show', author_path(author), class: "text-blue-600 hover:text-blue-900" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @authors %>

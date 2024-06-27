@@ -1,14 +1,17 @@
 <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
+<% if @book.cover.attached? %>
+  <%= image_tag @book.cover, class: "mb-4" %>
+<% end %>
 <p class="mb-4">Description: <%= @book.description %></p>
-<p class="mb-4">Authors: </p>
-<ul class="list-disc list-inside mb-4">
-  <% @book.authors.each do |author| %>
-    <li><%= link_to author.name, author_path(author), class: "text-blue-600 hover:text-blue-900" %></li>
-  <% end %>
-</ul>
 <p class="mb-4">Genres: </p>
 <ul class="list-disc list-inside">
   <% @book.genres.each do |genre| %>
     <li><%= link_to genre.name, genre_path(genre), class: "text-blue-600 hover:text-blue-900" %></li>
+  <% end %>
+</ul>
+<p class="mb-4">Reviews: </p>
+<ul class="list-disc list-inside">
+  <% @book.reviews.each do |review| %>
+    <li><%= link_to review.content, review_path(review), class: "text-blue-600 hover:text-blue-900" %></li>
   <% end %>
 </ul>

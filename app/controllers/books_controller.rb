@@ -1,9 +1,9 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show edit update destroy]
+  before_action :set_book, only: %i[show]
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result(distinct: true)
+    @books = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def show
@@ -11,9 +11,6 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-  end
-
-  def edit
   end
 
   def create
@@ -25,19 +22,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def update
-    if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'
-  end
-
   private
 
   def set_book
@@ -45,6 +29,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :description, :author_ids => [], :genre_ids => [])
+    params.require(:book).permit(:title, :description, :cover)
   end
 end

@@ -1,9 +1,11 @@
-<h1><%= @author.name %></h1>
-<p>Bio: <%= @author.bio %></p>
-<p>Books: </p>
-<ul>
+<h1 class="text-3xl font-bold mb-4"><%= @author.name %></h1>
+<% if @author.photo.attached? %>
+  <%= image_tag @author.photo, class: "mb-4" %>
+<% end %>
+<p class="mb-4">Bio: <%= @author.bio %></p>
+<p class="mb-4">Books: </p>
+<ul class="list-disc list-inside">
   <% @author.books.each do |book| %>
-    <li><%= link_to book.title, book_path(book) %></li>
+    <li><%= link_to book.title, book_path(book), class: "text-blue-600 hover:text-blue-900" %></li>
   <% end %>
 </ul>
-
