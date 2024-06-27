@@ -77,3 +77,5 @@ gem "devise", "~> 4.9"
 gem "sassc-rails", "~> 2.1"
 
 gem "faker", "~> 3.1"
+
+gem 'ransack', "~> 3.2"

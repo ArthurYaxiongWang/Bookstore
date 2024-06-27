@@ -1,6 +1,32 @@
-<h1>Genres</h1>
-<ul>
-  <% @genres.each do |genre| %>
-    <li><%= link_to genre.name, genre_path(genre) %></li>
-  <% end %>
-</ul>
+<h1 class="text-3xl font-bold mb-4">Genres</h1>
+
+<%= search_form_for @q, url: genres_path, method: :get, class: "mb-5" do |f| %>
+  <div class="form-group mb-4">
+    <%= f.label :name_cont, "Search by name", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.search_field :name_cont, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Search', class: "btn" %>
+  </div>
+<% end %>
+
+<table class="min-w-full bg-white border">
+  <thead class="bg-gray-50">
+    <tr>
+      <th class="py-2 px-4 border-b">Name</th>
+      <th class="py-2 px-4 border-b">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr class="bg-white">
+        <td class="py-2 px-4 border-b"><%= genre.name %></td>
+        <td class="py-2 px-4 border-b">
+          <%= link_to 'Show', genre_path(genre), class: "text-blue-600 hover:text-blue-900" %>
+          <%= link_to 'Edit', edit_genre_path(genre), class: "text-blue-600 hover:text-blue-900" %>
+          <%= link_to 'Destroy', genre_path(genre), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-900" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

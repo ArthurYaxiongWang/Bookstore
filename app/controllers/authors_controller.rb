@@ -1,6 +1,7 @@
 class AuthorsController < ApplicationController
   def index
-    @authors = Author.all
+    @q = Author.ransack(params[:q])
+    @authors = @q.result(distinct: true)
   end
 
   def show

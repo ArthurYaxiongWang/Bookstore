@@ -1,6 +1,32 @@
-<h1>Books</h1>
-<ul>
-  <% @books.each do |book| %>
-    <li><%= link_to book.title, book_path(book) %></li>
-  <% end %>
-</ul>
+<h1 class="text-3xl font-bold mb-4">Books</h1>
+
+<%= search_form_for @q, url: books_path, method: :get, class: "mb-5" do |f| %>
+  <div class="form-group mb-4">
+    <%= f.label :title_cont, "Search by title", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.search_field :title_cont, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Search', class: "btn" %>
+  </div>
+<% end %>
+
+<table class="min-w-full bg-white border">
+  <thead class="bg-gray-50">
+    <tr>
+      <th class="py-2 px-4 border-b">Title</th>
+      <th class="py-2 px-4 border-b">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr class="bg-white">
+        <td class="py-2 px-4 border-b"><%= book.title %></td>
+        <td class="py-2 px-4 border-b">
+          <%= link_to 'Show', book_path(book), class: "text-blue-600 hover:text-blue-900" %>
+          <%= link_to 'Edit', edit_book_path(book), class: "text-blue-600 hover:text-blue-900" %>
+          <%= link_to 'Destroy', book_path(book), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-900" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
