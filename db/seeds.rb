@@ -10,48 +10,46 @@
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 require 'faker'
-require 'csv'
-require 'net/http'
-require 'json'
 
-# Create Genres
+# Clear existing data
+Author.destroy_all
+Book.destroy_all
+Genre.destroy_all
+Review.destroy_all
+Authorship.destroy_all
+BookGenre.destroy_all
+
+# Create authors
 10.times do
+  Author.create(name: Faker::Book.author, bio: Faker::Lorem.paragraph)
+end
+
+# Create genres
+5.times do
   Genre.create(name: Faker::Book.genre)
 end
 
-# Create Authors
+# Create books
 20.times do
-  Author.create(
-    name: Faker::Book.author,
-    bio: Faker::Lorem.paragraph
-  )
+  Book.create(title: Faker::Book.title, description: Faker::Lorem.paragraph, date: Faker::Date.between(from: 50.years.ago, to: Date.today))
 end
 
-# Create Books from an API (example: Open Library API)
-url = 'https://openlibrary.org/subjects/science_fiction.json?limit=20'
-uri = URI(url)
-response = Net::HTTP.get(uri)
-books = JSON.parse(response)["works"]
-
-books.each do |book|
-  b = Book.create(
-    title: book["title"],
-    description: Faker::Lorem.paragraph,
-    publication_date: Faker::Date.between(from: '1900-01-01', to: '2023-01-01')
-  )
-  # Associate random authors
-  b.authors << Author.order('RANDOM()').limit(2)
-  # Associate random genres
-  b.genres << Genre.order('RANDOM()').limit(2)
-end
-
-# Create Reviews for each book
+# Create reviews
 Book.all.each do |book|
-  5.times do
-    Review.create(
-      content: Faker::Lorem.paragraph,
-      rating: rand(1..5),
-      book: book
-    )
+  rand(1..5).times do
+    Review.create(content: Faker::Lorem.paragraph, rating: rand(1..5), book: book)
+  end
+end
+
+# Create authorships and book genres
+Book.all.each do |book|
+  authors = Author.order('RANDOM()').limit(rand(1..3))
+  authors.each do |author|
+    Authorship.create(author: author, book: book)
+  end
+
+  genres = Genre.order('RANDOM()').limit(rand(1..2))
+  genres.each do |genre|
+    BookGenre.create(book: book, genre: genre)
   end
 end
