@@ -3,7 +3,7 @@ class GenresController < ApplicationController
 
   def index
     @q = Genre.ransack(params[:q])
-    @genres = @q.result(distinct: true).page(params[:page])
+    @genres = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def show
