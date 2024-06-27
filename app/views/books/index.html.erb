@@ -14,7 +14,7 @@
   <thead class="bg-gray-50">
     <tr>
       <th class="py-2 px-4 border-b">Title</th>
-      <th class="py-2 px-4 border-b">Actions</th>
+      <th class="py-2 px-4 border-b"></th>
     </tr>
   </thead>
   <tbody>
@@ -23,8 +23,7 @@
         <td class="py-2 px-4 border-b"><%= book.title %></td>
         <td class="py-2 px-4 border-b">
           <%= link_to 'Show', book_path(book), class: "text-blue-600 hover:text-blue-900" %>
-          <%= link_to 'Edit', edit_book_path(book), class: "text-blue-600 hover:text-blue-900" %>
-          <%= link_to 'Destroy', book_path(book), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-900" %>
+    
         </td>
       </tr>
     <% end %>

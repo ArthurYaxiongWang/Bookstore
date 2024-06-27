@@ -14,7 +14,7 @@
   <thead class="bg-gray-50">
     <tr>
       <th class="py-2 px-4 border-b">Name</th>
-      <th class="py-2 px-4 border-b">Actions</th>
+      <th class="py-2 px-4 border-b"></th>
     </tr>
   </thead>
   <tbody>
@@ -23,8 +23,6 @@
         <td class="py-2 px-4 border-b"><%= genre.name %></td>
         <td class="py-2 px-4 border-b">
           <%= link_to 'Show', genre_path(genre), class: "text-blue-600 hover:text-blue-900" %>
-          <%= link_to 'Edit', edit_genre_path(genre), class: "text-blue-600 hover:text-blue-900" %>
-          <%= link_to 'Destroy', genre_path(genre), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-900" %>
         </td>
       </tr>
     <% end %>
