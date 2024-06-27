@@ -1,0 +1,4 @@
+<h1>Review</h1>
+<p><%= @review.content %></p>
+<p>Rating: <%= @review.rating %></p>
+<p>Book: <%= link_to @review.book.title, book_path(@review.book) %></p>

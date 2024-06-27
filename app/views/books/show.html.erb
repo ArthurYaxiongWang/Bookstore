@@ -1,0 +1,24 @@
+<h1><%= @book.title %></h1>
+<p><%= @book.description %></p>
+<p><%= @book.date %></p>
+
+<h2>Authors</h2>
+<ul>
+  <% @book.authors.each do |author| %>
+    <li><%= link_to author.name, author_path(author) %></li>
+  <% end %>
+</ul>
+
+<h2>Genres</h2>
+<ul>
+  <% @book.genres.each do |genre| %>
+    <li><%= link_to genre.name, genre_path(genre) %></li>
+  <% end %>
+</ul>
+
+<h2>Reviews</h2>
+<ul>
+  <% @book.reviews.each do |review| %>
+    <li><%= review.content %> - Rating: <%= review.rating %></li>
+  <% end %>
+</ul>
