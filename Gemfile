@@ -78,4 +78,4 @@ gem "sassc-rails", "~> 2.1"
 
 gem "faker", "~> 3.1"
 
-gem 'ransack', "~> 3.2"
+gem 'ransack', "~> 4.1"
