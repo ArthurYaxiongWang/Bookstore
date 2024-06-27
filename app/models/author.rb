@@ -4,4 +4,12 @@ class Author < ApplicationRecord
 
   validates :name, presence: true
   validates :bio, presence: true
+
+  def self.ransackable_associations(auth_object = nil)
+    ["authorships", "books"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "bio"]
+  end
 end
