@@ -1,4 +1,3 @@
 <h1 class="text-3xl font-bold mb-4">Review</h1>
 <p class="mb-4">Content: <%= @review.content %></p>
 <p class="mb-4">Book: <%= link_to @review.book.title, book_path(@review.book), class: "text-blue-600 hover:text-blue-900" %></p>
-<p class="mb-4">Author: <%= link_to @review.author.name, author_path(@review.author), class: "text-blue-600 hover:text-blue-900" %></p>

@@ -79,9 +79,3 @@ gem "sassc-rails", "~> 2.1"
 gem "faker", "~> 3.1"
 
 gem 'ransack', "~> 4.1"
-
-gem 'kaminari', "~> 1.2"
-
-gem 'image_processing', "~> 1.12"
-
-gem 'active_storage_validations', "~> 0.9.8"

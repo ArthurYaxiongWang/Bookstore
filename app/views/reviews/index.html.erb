@@ -1,12 +1,32 @@
-<div>
-  <h1 class="font-bold text-4xl">Reviews#index</h1>
-  <p>Find me in app/views/reviews/index.html.erb</p>
-</div>
-<h1 class="text-3xl font-bold mb-4"><%= @genre.name %></h1>
-<p class="mb-4">Description: <%= @genre.description %></p>
-<p class="mb-4">Books: </p>
-<ul class="list-disc list-inside">
-  <% @genre.books.each do |book| %>
-    <li><%= link_to book.title, book_path(book), class: "text-blue-600 hover:text-blue-900" %></li>
-  <% end %>
-</ul>
+<h1 class="text-3xl font-bold mb-4">Reviews</h1>
+
+<%= search_form_for @q, url: reviews_path, method: :get, class: "mb-5" do |f| %>
+  <div class="form-group mb-4">
+    <%= f.label :content_cont, "Search by content", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.search_field :content_cont, class: "form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Search', class: "btn" %>
+  </div>
+<% end %>
+
+<table class="min-w-full bg-white border">
+  <thead class="bg-gray-50">
+    <tr>
+      <th class="py-2 px-4 border-b">Content</th>
+      <th class="py-2 px-4 border-b">Book</th>
+      <th class="py-2 px-4 border-b">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr class="bg-white">
+        <td class="py-2 px-4 border-b"><%= review.content %></td>
+        <td class="py-2 px-4 border-b"><%= link_to review.book.title, book_path(review.book), class: "text-blue-600 hover:text-blue-900" %></td>
+        <td class="py-2 px-4 border-b">
+          <%= link_to 'Show', review_path(review), class: "text-blue-600 hover:text-blue-900" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
