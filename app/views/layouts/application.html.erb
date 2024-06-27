@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IntroProject</title>
+    <title>Bookstore</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <style>
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-control {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-      }
-      .btn {
-        padding: 10px 15px;
-        background-color: #111827;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-    </style>
   </head>
 
-  <body>
-    <main class="prose container mx-auto px-5">
+  <body class="bg-gray-100 text-gray-800">
+    <header class="bg-white shadow">
+      <nav class="container mx-auto px-5 py-3 flex justify-between items-center">
+        <div class="text-xl font-bold">
+          <%= link_to 'Bookstore', root_path %>
+        </div>
+        <ul class="flex space-x-4">
+          <li><%= link_to 'Home', root_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+          <li><%= link_to 'About', about_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+          <li><%= link_to 'Authors', authors_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+          <li><%= link_to 'Books', books_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+          <li><%= link_to 'Genres', genres_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+          <li><%= link_to 'Reviews', reviews_path, class: 'text-gray-700 hover:text-blue-600' %></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container mx-auto px-5 py-5">
       <%= yield %>
     </main>
   </body>
