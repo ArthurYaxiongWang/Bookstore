@@ -7,11 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 require 'faker'
 
 # Clear existing data
+AdminUser.destroy_all
 Author.destroy_all
 Book.destroy_all
 Genre.destroy_all
@@ -19,37 +20,52 @@ Review.destroy_all
 Authorship.destroy_all
 BookGenre.destroy_all
 
+# Create admin user
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if AdminUser.count == 0
+
 # Create authors
 10.times do
-  Author.create(name: Faker::Book.author, bio: Faker::Lorem.paragraph)
+  Author.create!(
+    name: Faker::Book.author,
+    bio: Faker::Lorem.sentence
+  )
 end
 
 # Create genres
 5.times do
-  Genre.create(name: Faker::Book.genre)
+  Genre.create!(
+    name: Faker::Book.genre
+  )
 end
 
 # Create books
-20.times do
-  Book.create(title: Faker::Book.title, description: Faker::Lorem.paragraph, date: Faker::Date.between(from: 50.years.ago, to: Date.today))
-end
+50.times do
+  book = Book.create!(
+    title: Faker::Book.title,
+    description: Faker::Lorem.paragraph,
+    date: Faker::Date.backward(days: 365) # Ensure 'date' column exists in books table
+  )
 
-# Create reviews
-Book.all.each do |book|
-  rand(1..5).times do
-    Review.create(content: Faker::Lorem.paragraph, rating: rand(1..5), book: book)
+  # Create authorship
+  Authorship.create!(
+    author: Author.all.sample,
+    book: book
+  )
+
+  # Create book genres
+  BookGenre.create!(
+    book: book,
+    genre: Genre.all.sample
+  )
+
+  # Create reviews
+  3.times do
+    Review.create!(
+      content: Faker::Lorem.sentence,
+      rating: rand(1..5),
+      book: book
+    )
   end
 end
 
-# Create authorships and book genres
-Book.all.each do |book|
-  authors = Author.order('RANDOM()').limit(rand(1..3))
-  authors.each do |author|
-    Authorship.create(author: author, book: book)
-  end
-
-  genres = Genre.order('RANDOM()').limit(rand(1..2))
-  genres.each do |genre|
-    BookGenre.create(book: book, genre: genre)
-  end
-end
+puts "Seeded #{Author.count} authors, #{Book.count} books, #{Genre.count} genres, #{Review.count} reviews, #{Authorship.count} authorships, #{BookGenre.count} book genres, #{AdminUser.count} admin users"
