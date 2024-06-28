@@ -12,4 +12,6 @@ class Author < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["name", "bio"]
   end
+
+  has_one_attached :profile_picture
 end

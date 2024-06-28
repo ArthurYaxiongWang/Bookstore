@@ -17,4 +17,5 @@ class Book < ApplicationRecord
     ["title", "description", "date"]
   end
 
+  has_many_attached :images
 end

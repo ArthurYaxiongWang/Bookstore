@@ -1,0 +1,10 @@
+<%= form_with(model: book, local: true) do |form| %>
+  <!-- Other fields -->
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
