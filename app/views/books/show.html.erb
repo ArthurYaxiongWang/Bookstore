@@ -1,14 +1,6 @@
 <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
-<p class="mb-4">Description: <%= @book.description %></p>
-<p class="mb-4">Authors: </p>
-<ul class="list-disc list-inside mb-4">
-  <% @book.authors.each do |author| %>
-    <li><%= link_to author.name, author_path(author), class: "text-blue-600 hover:text-blue-900" %></li>
-  <% end %>
-</ul>
-<p class="mb-4">Genres: </p>
-<ul class="list-disc list-inside">
-  <% @book.genres.each do |genre| %>
-    <li><%= link_to genre.name, genre_path(genre), class: "text-blue-600 hover:text-blue-900" %></li>
-  <% end %>
-</ul>
+<p><strong>Author:</strong> <%= link_to @book.authors.first.name, author_path(@book.authors.first) %></p>
+<p><strong>Genre:</strong> <%= link_to @book.genres.first.name, genre_path(@book.genres.first) %></p>
+<p><strong>Description:</strong> <%= @book.description %></p>
+
+<%= link_to 'Back to Books', books_path %>
