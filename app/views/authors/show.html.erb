@@ -1,11 +1,15 @@
 <h1 class="text-3xl font-bold mb-4"><%= @author.name %></h1>
 <p><strong>Biography:</strong> <%= @author.biography %></p>
 
-<h2 class="text-2xl font-bold mt-5">Books</h2>
-<ul>
-  <% @author.books.each do |book| %>
-    <li><%= link_to book.title, book_path(book) %></li>
-  <% end %>
-</ul>
+<% if @author.books.any? %>
+  <h2 class="text-2xl font-bold mt-5">Books</h2>
+  <ul>
+    <% @author.books.each do |book| %>
+      <li><%= link_to book.title, book_path(book) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This author has no books listed.</p>
+<% end %>
 
 <%= link_to 'Back to Authors', authors_path %>
