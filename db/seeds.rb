@@ -11,7 +11,6 @@
 
 require 'faker'
 
-# Clear existing data
 AdminUser.destroy_all
 Author.destroy_all
 Book.destroy_all
@@ -20,10 +19,8 @@ Review.destroy_all
 Authorship.destroy_all
 BookGenre.destroy_all
 
-# Create admin user
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if AdminUser.count == 0
 
-# Create authors
 10.times do
   Author.create!(
     name: Faker::Book.author,
@@ -31,34 +28,29 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
   )
 end
 
-# Create genres
 5.times do
   Genre.create!(
     name: Faker::Book.genre
   )
 end
 
-# Create books
 50.times do
   book = Book.create!(
     title: Faker::Book.title,
     description: Faker::Lorem.paragraph,
-    date: Faker::Date.backward(days: 365) # Ensure 'date' column exists in books table
+    date: Faker::Date.backward(days: 365)
   )
 
-  # Create authorship
   Authorship.create!(
     author: Author.all.sample,
     book: book
   )
 
-  # Create book genres
   BookGenre.create!(
     book: book,
     genre: Genre.all.sample
   )
 
-  # Create reviews
   3.times do
     Review.create!(
       content: Faker::Lorem.sentence,
