@@ -13,5 +13,4 @@ class Author < ApplicationRecord
     ["name", "bio"]
   end
 
-  has_one_attached :profile_picture
 end

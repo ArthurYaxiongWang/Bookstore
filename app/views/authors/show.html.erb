@@ -1,12 +1,6 @@
 <h1 class="text-3xl font-bold mb-4"><%= @author.name %></h1>
 <p><strong>Biography:</strong> <%= @author.biography %></p>
 
-<% if @author.profile_picture.attached? %>
-  <div>
-    <%= image_tag @author.profile_picture %>
-  </div>
-<% end %>
-
 <h2 class="text-2xl font-bold mt-5">Books</h2>
 <ul>
   <% @author.books.each do |book| %>
